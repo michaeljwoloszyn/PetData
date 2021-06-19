@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<main>
+    <h1>Pet List</h1>
+    <table th:unless="${#lists.isEmpty(pets)}">
+        <tr>
+            <th>Pet Name</th>
+            <th>Pet Kind</th>
+            <th>Gender</th>
+            <th>Vaccine Status</th>
+            <th>Options</th>
+        </tr>
+        <tr th:each="n: ${pets}">
+            <td th:text="${n.petName}">Max</td>
+            <td th:text="${n.petKind}">Dog</td>
+            <td th:text="${n.gender}">Male</td>
+            <td th:text="${n.vaccineStatus}">True</td>
+            <td>
+                <a href="EditPet.html" th:href="@{EditPet(id=${n.id})}">Edit</a>
+                &nbsp;|&nbsp;
+                <a href="DeletePet.html" th:href="@{DeletePet(id=${n.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <p class="message" th:if="${#lists.isEmpty(pets)}">No pet data</p>
+    <p><a href="Index.html" th:href="@{Index}">Index</a></p>
+    <p><a href="AddPet.html" th:href="@{AddPet}">Add Pet</a></p>
+</main>
 </body>
 </html>

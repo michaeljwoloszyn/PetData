@@ -5,6 +5,36 @@
     <title>Title</title>
 </head>
 <body>
+<main>
+    <h1>Delete Record</h1>
+    <p class="message">Do you want to remove this record?</p>
+    <h2>Record Data:</h2>
+    <div th:object="${pet}">
+        <p>
+            <label class="group_label">Pet Name:</label>
+            <span class="output" th:text="*{petName}">Bart</span>
+        </p>
+        <p>
+            <label class="group_label">Pet Kind:</label>
+            <span class="output" th:text="*{petKind}">Simpson</span>
+        </p>
+        <p>
+            <label class="group_label">Gender:</label>
+            <span class="output" th:text="*{gender}">Computer Programmer</span>
+        </p>
+        <p>
+            <label class="group_label">Vaccine Status:</label>
+            <span class="output" th:text="*{vaccineStatus}">1</span>
+        </p>
+    </div>
+    <form method="post" th:action="@{RemovePet}" action="ListPets.html">
+        <input type="hidden" name="id" th:value="${pet.id}">
+        <input type="submit" value="Remove Record">
+    </form>
 
+    <p><a href="Index.html" th:href="@{Index}">Index</a></p>
+    <p><a href="AddPet.html" th:href="@{AddPet}">Add Pet</a></p>
+    <p><a href="ListPets.html" th:href="@{ListPets}">List Pets</a></p>
+</main>
 </body>
 </html>

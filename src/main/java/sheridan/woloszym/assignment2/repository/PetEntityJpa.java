@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="pet")
 public class PetEntityJpa implements Serializable {
+
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,9 @@ public class PetEntityJpa implements Serializable {
 
     @Column(name = "vaccineStatus")
     private Boolean vaccineStatus = false;
+
+    public PetEntityJpa(){
+    }
 
     public void setId(Integer id) {
         this.id = id;
