@@ -2,9 +2,9 @@ package sheridan.woloszym.assignment2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import sheridan.woloszym.assignment2.model.PetForm;
 import sheridan.woloszym.assignment2.service.PetDataService;
@@ -30,6 +30,36 @@ public class PetDataCpntroller {
                 new ModelAndView("AddPet",
                         "form", new PetForm());
         return modelAndView;
+    }
+
+    @PostMapping("/InsertPet")
+    public String insertPet(
+            @Validated @ModelAttribute("form") PetForm form,
+            BindingResult bindingResult,
+            Model model){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("form", form);
+            return "AddPet";
+        } else {
+            petDataService.insertPetForm(form);
+            return "redirect:ConfirmInsert/" + form.getId();
+        }
+    }
+
+    @GetMapping("/ConfirmInsert/{id}")
+    public String confirmInsert(@PathVariable(name = "id") String strId, Model model){
+        try {
+            int id = Integer.parseInt(strId);
+            PetForm form = petDataService.getPetForm(id);
+            if (form == null) {
+                return "DataNotFound";
+            } else {
+                model.addAttribute("form", form);
+                return "ConfirmInsert";
+            }
+        } catch (NumberFormatException e) {
+            return "AddPet";
+        }
     }
 
     @GetMapping("/DeletePet")

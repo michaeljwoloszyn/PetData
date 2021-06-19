@@ -8,17 +8,9 @@ import java.io.Serializable;
 public class PetForm implements Serializable {
 
     private Integer id;
-
-    @NotBlank
     private String petName = "";
-
-    @Column(name = "pet_kind")
     private String petKind = "";
-
-    @Column(name = "gender")
     private String gender = "";
-
-    @Column(name = "vaccineStatus")
     private Boolean vaccineStatus = false;
 
     public void setId(Integer id) {

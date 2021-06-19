@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Insert</title>
+</head>
+<body>
+<main>
+  <h1>Confirm Insert</h1>
+  <h2>Entered Data:</h2>
+  <div th:object="${form}">
+    <p>
+      <label class="group_label">Pet Name:</label>
+      <span class="output" th:text="*{petName}">Bart</span>
+    </p>
+    <p>
+      <label class="group_label">Pet Kind:</label>
+      <span class="output" th:text="*{petKind}">Simpson</span>
+    </p>
+    <p>
+      <label class="group_label">Gender:</label>
+      <span class="output" th:text="*{gender}">Computer Programmer</span>
+    </p>
+    <p>
+      <label class="group_label">Vaccine Status:</label>
+      <span class="output" th:text="*{vaccineStatus}">1</span>
+    </p>
+  </div>
+  <p><a href="Index.html" th:href="@{../Index}">Index</a></p>
+  <p><a href="AddPet.html" th:href="@{../AddPet}">Add Pet</a></p>
+  <p><a href="ListPets.html" th:href="@{../ListPet}">List Pets</a></p>
+</main>
+</body>
+</html>
